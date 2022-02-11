@@ -1,0 +1,115 @@
+BL51 BANKED LINKER/LOCATER V4.20                                                        06/20/2018  12:48:46  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V4.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE nuevo.obj TO codigo mejorado RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  nuevo.obj (EJEMPLO)
+
+
+LINK MAP OF MODULE:  codigo mejorado (EJEMPLO)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0088H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  codigo mejorado (EJEMPLO)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        EJEMPLO
+  C:005BH         SYMBOL        APAGARCAPAS
+  N:0023H         SYMBOL        CONTA
+  N:0020H         SYMBOL        CONTADOR1
+  N:0021H         SYMBOL        CONTADOR2
+  N:0022H         SYMBOL        CONTADOR3
+  N:0000H         SYMBOL        EJEMPLO
+  C:006FH         SYMBOL        INTE0
+  C:0071H         SYMBOL        INTE1
+  C:0064H         SYMBOL        MAIN
+  D:0080H         SYMBOL        P0
+  D:00A0H         SYMBOL        P2
+  D:00B0H         SYMBOL        P3
+  C:003AH         SYMBOL        PUERTO0NEGATIVO
+  C:004BH         SYMBOL        PUERTO2NEGATIVO
+  C:0033H         SYMBOL        RESET
+  C:0078H         SYMBOL        RETA1
+  C:007BH         SYMBOL        RETA2
+  C:007EH         SYMBOL        RETA3
+  C:0075H         SYMBOL        RETARDO
+  C:0070H         SYMBOL        TOV0
+  C:0072H         SYMBOL        TOV1
+  C:0074H         SYMBOL        TOV2
+  C:0073H         SYMBOL        UART
+  C:0000H         LINE#         12
+  C:0003H         LINE#         14
+  C:000BH         LINE#         16
+  C:0013H         LINE#         18
+  C:001BH         LINE#         20
+  C:0023H         LINE#         22
+  C:002BH         LINE#         24
+BL51 BANKED LINKER/LOCATER V4.20                                                      06/20/2018  12:48:46  PAGE 2
+
+
+  C:0033H         LINE#         28
+  C:0036H         LINE#         31
+  C:0038H         LINE#         32
+  C:003AH         LINE#         35
+  C:003CH         LINE#         36
+  C:003EH         LINE#         37
+  C:0040H         LINE#         38
+  C:0042H         LINE#         39
+  C:0044H         LINE#         40
+  C:0046H         LINE#         41
+  C:0048H         LINE#         42
+  C:004AH         LINE#         43
+  C:004BH         LINE#         45
+  C:004DH         LINE#         46
+  C:004FH         LINE#         47
+  C:0051H         LINE#         48
+  C:0053H         LINE#         49
+  C:0055H         LINE#         50
+  C:0057H         LINE#         51
+  C:0059H         LINE#         52
+  C:005BH         LINE#         54
+  C:005DH         LINE#         55
+  C:005FH         LINE#         56
+  C:0061H         LINE#         57
+  C:0063H         LINE#         58
+  C:0064H         LINE#         65
+  C:0065H         LINE#         66
+  C:0067H         LINE#         67
+  C:0069H         LINE#         68
+  C:006BH         LINE#         70
+  C:006DH         LINE#         72
+  C:006FH         LINE#         76
+  C:0070H         LINE#         77
+  C:0071H         LINE#         78
+  C:0072H         LINE#         79
+  C:0073H         LINE#         80
+  C:0074H         LINE#         81
+  C:0075H         LINE#         85
+  C:0078H         LINE#         86
+  C:007BH         LINE#         87
+  C:007EH         LINE#         88
+  C:0081H         LINE#         89
+  C:0084H         LINE#         90
+  C:0087H         LINE#         91
+  -------         ENDMOD        EJEMPLO
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 006BH BYTE ( 5%) *
+******************************************************************************
+
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

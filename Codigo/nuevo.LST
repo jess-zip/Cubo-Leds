@@ -1,0 +1,141 @@
+A51 MACRO ASSEMBLER  NUEVO                                                                06/20/2018 12:48:45 PAGE     1
+
+
+MACRO ASSEMBLER A51 V6.20
+OBJECT MODULE PLACED IN nuevo.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE nuevo.a52 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*********************************************************************************
+                       2     ;********************** PROGRAMA QUE SIRVE COMO PLANTILLA ************************
+                       3     ;*********************************************************************************
+                       4     NAME    Ejemplo
+                       5     ;--------------------------------- VARIABLES -------------------------------------
+  0020                 6     CONTADOR1       EQU     20H
+  0021                 7     CONTADOR2       EQU     21H
+  0022                 8     CONTADOR3       EQU     22H
+  0023                 9     CONTA           EQU     23H
+                      10     ;-------------------------- VECTOR DE INTERRUPCIONES ----------------------------
+0000                  11             ORG     00H
+0000 0133             12                     AJMP    RESET           ;Brincar a la etiqueta RESET
+0003                  13             ORG     03H
+0003 016F             14                     AJMP    INTE0
+000B                  15             ORG     0BH
+000B 0170             16                     AJMP    TOV0
+0013                  17             ORG     13H
+0013 0171             18                     AJMP    INTE1
+001B                  19             ORG     1BH
+001B 0172             20                     AJMP    TOV1
+0023                  21             ORG     23H
+0023 0173             22                     AJMP    UART
+002B                  23             ORG     2BH
+002B 0174             24                     AJMP    TOV2
+                      25     
+                      26     ;--------------------------------Rutina de configuracion---------------------------
+0033                  27             ORG   33H
+0033 758107           28     Reset:  MOV   81h, #07h ;Inicializa la pila podria ser tambien sp en vez de 81h
+                      29             ;ACALL PUERTO0NEGATIVO
+                      30             ;ACALL PUERTO2NEGATIVO
+0036 115B             31             ACALL APAGARCAPAS
+0038 0164             32             AJMP MAIN               ;Brinca al main, no es necesaria si el main esta abajo
+                      33     
+003A                  34     PUERTO0NEGATIVO:
+003A B280             35             CPL P0.0        
+003C B281             36             CPL P0.1
+003E B282             37             CPL P0.2
+0040 B283             38             CPL P0.3
+0042 B284             39             CPL P0.4
+0044 B285             40             CPL P0.5
+0046 B286             41             CPL P0.6
+0048 B287             42             CPL P0.7
+004A 22               43             RET
+004B                  44     PUERTO2NEGATIVO:
+004B B2A0             45             CPL P2.0
+004D B2A1             46             CPL P2.1
+004F B2A2             47             CPL P2.2
+0051 B2A3             48             CPL P2.3
+0053 B2A4             49             CPL P2.4
+0055 B2A5             50             CPL P2.5
+0057 B2A6             51             CPL P2.6
+0059 B2A7             52             CPL P2.7
+005B                  53     APAGARCAPAS:
+005B B2B0             54             CPL P3.0
+005D B2B1             55             CPL P3.1
+005F B2B2             56             CPL P3.2
+0061 B2B3             57             CPL P3.3
+0063 22               58             RET
+A51 MACRO ASSEMBLER  NUEVO                                                                06/20/2018 12:48:45 PAGE     2
+
+                      59     ;-------------------------------Programa Principal--------------------------------
+0064                  60     MAIN:   ;MOV A,P0               ; p0 es el camion "EL puerto  1"
+                      61             ;MOV P1, A              ; lo que tiene A pasa a p1
+                      62             ;CPL P3.0
+                      63             ;CPL P0.0
+                      64     
+0064 C3               65             CLR C
+0065 9280             66             MOV P0.0,C
+0067 B2B0             67             CPL P3.0
+0069 B2B1             68             CPL P3.1
+                      69     
+006B 1175             70             ACALL RETARDO
+                      71     
+006D 0164             72             AJMP MAIN               ;Brinca al main
+                      73     
+                      74     
+                      75     ;------------------------------ INICIO DE INTERRUPCIONES --------------------------
+006F 32               76     INTE0:  RETI
+0070 32               77     TOV0:   RETI 
+0071 32               78     INTE1:  RETI
+0072 32               79     TOV1:   RETI
+0073 32               80     UART:   RETI
+0074 32               81     TOV2:   RETI
+                      82     
+                      83     ;--------------------------------- INICIO DE SUBRUTINAS ---------------------------
+                      84     
+0075 752050           85     RETARDO:        MOV CONTADOR1,#80
+0078 7521FF           86     RETA1:          MOV CONTADOR2,#255
+007B 752250           87     RETA2:          MOV CONTADOR3,#80
+007E D522FD           88     RETA3:          DJNZ CONTADOR3,RETA3
+0081 D521F7           89                     DJNZ CONTADOR2,RETA2
+0084 D520F1           90                     DJNZ CONTADOR1,RETA1
+0087 22               91                     RET
+                      92     
+                      93     END
+A51 MACRO ASSEMBLER  NUEVO                                                                06/20/2018 12:48:45 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+APAGARCAPAS. . . .  C ADDR   005BH   A   
+CONTA. . . . . . .  N NUMB   0023H   A   
+CONTADOR1. . . . .  N NUMB   0020H   A   
+CONTADOR2. . . . .  N NUMB   0021H   A   
+CONTADOR3. . . . .  N NUMB   0022H   A   
+EJEMPLO. . . . . .  N NUMB   -----       
+INTE0. . . . . . .  C ADDR   006FH   A   
+INTE1. . . . . . .  C ADDR   0071H   A   
+MAIN . . . . . . .  C ADDR   0064H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+PUERTO0NEGATIVO. .  C ADDR   003AH   A   
+PUERTO2NEGATIVO. .  C ADDR   004BH   A   
+RESET. . . . . . .  C ADDR   0033H   A   
+RETA1. . . . . . .  C ADDR   0078H   A   
+RETA2. . . . . . .  C ADDR   007BH   A   
+RETA3. . . . . . .  C ADDR   007EH   A   
+RETARDO. . . . . .  C ADDR   0075H   A   
+TOV0 . . . . . . .  C ADDR   0070H   A   
+TOV1 . . . . . . .  C ADDR   0072H   A   
+TOV2 . . . . . . .  C ADDR   0074H   A   
+UART . . . . . . .  C ADDR   0073H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

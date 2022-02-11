@@ -1,0 +1,93 @@
+;*********************************************************************************
+;********************** PROGRAMA QUE SIRVE COMO PLANTILLA ************************
+;*********************************************************************************
+NAME	Ejemplo
+;--------------------------------- VARIABLES -------------------------------------
+CONTADOR1	EQU	20H
+CONTADOR2	EQU	21H
+CONTADOR3	EQU	22H
+CONTA		EQU	23H
+;-------------------------- VECTOR DE INTERRUPCIONES ----------------------------
+	ORG	00H
+		AJMP	RESET		;Brincar a la etiqueta RESET
+	ORG	03H
+		AJMP	INTE0
+	ORG	0BH
+		AJMP	TOV0
+	ORG	13H
+		AJMP	INTE1
+	ORG	1BH
+		AJMP	TOV1
+	ORG	23H
+		AJMP	UART
+	ORG	2BH
+		AJMP	TOV2
+
+;--------------------------------Rutina de configuracion---------------------------
+	ORG   33H
+Reset:  MOV   81h, #07h ;Inicializa la pila podria ser tambien sp en vez de 81h
+	;ACALL PUERTO0NEGATIVO
+	;ACALL PUERTO2NEGATIVO
+	ACALL APAGARCAPAS
+	AJMP MAIN		;Brinca al main, no es necesaria si el main esta abajo
+
+PUERTO0NEGATIVO:
+	CPL P0.0	
+	CPL P0.1
+	CPL P0.2
+	CPL P0.3
+	CPL P0.4
+	CPL P0.5
+	CPL P0.6
+	CPL P0.7
+	RET
+PUERTO2NEGATIVO:
+	CPL P2.0
+	CPL P2.1
+	CPL P2.2
+	CPL P2.3
+	CPL P2.4
+	CPL P2.5
+	CPL P2.6
+	CPL P2.7
+APAGARCAPAS:
+	CPL P3.0
+	CPL P3.1
+	CPL P3.2
+	CPL P3.3
+	RET
+;-------------------------------Programa Principal--------------------------------
+MAIN:   ;MOV A,P0		; p0 es el camion "EL puerto  1"
+	;MOV P1, A		; lo que tiene A pasa a p1
+	;CPL P3.0
+	;CPL P0.0
+
+	CLR C
+	MOV P0.0,C
+	CPL P3.0
+	CPL P3.1
+
+	ACALL RETARDO
+
+	AJMP MAIN		;Brinca al main
+
+
+;------------------------------ INICIO DE INTERRUPCIONES --------------------------
+INTE0:	RETI
+TOV0:	RETI 
+INTE1:	RETI
+TOV1:	RETI
+UART:	RETI
+TOV2:	RETI
+
+;--------------------------------- INICIO DE SUBRUTINAS ---------------------------
+
+RETARDO:	MOV CONTADOR1,#80
+RETA1:		MOV CONTADOR2,#255
+RETA2:		MOV CONTADOR3,#80
+RETA3:		DJNZ CONTADOR3,RETA3
+		DJNZ CONTADOR2,RETA2
+		DJNZ CONTADOR1,RETA1
+		RET
+
+END
